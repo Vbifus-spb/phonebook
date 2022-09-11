@@ -1,10 +1,9 @@
 import sqlite3 as sq
-import csv
+import exim
 
 conn = sq.connect('phonbook1.db')
 
 cur = conn.cursor()
-# abonid INTEGER PRIMARY KEY AUTOINCREMENT,
 
 cur.execute("""CREATE TABLE IF NOT EXISTS phonebook(
     fname TEXT,
@@ -46,6 +45,8 @@ def find_abon():
     else:
         for q in all_results:
             print(' '.join(q), '\n')
+            
+exim.im
 
 
 while True:
