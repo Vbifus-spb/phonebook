@@ -110,7 +110,9 @@ def show_all():
 
 while True:
     fl = input('1 - телефонная книга \n2 - импорт/экспорт данных \nдля выхода - 0 ')
-    if fl == '1':
+    fl = int(fl)
+    if fl == 1:
+
         while True:
             fl1 = input('1 - просмотр всех записей \n2 - поиск записей \n3 - изменений записей \n4- удаление записей \nдля выхода - 0 ')
             fl1 = int(fl1)
@@ -130,9 +132,10 @@ while True:
             elif fl1 == 0:
                 break
 
-    elif fl == '2':
+    elif fl == 2:
         while True:
             fl2 = input('1 - импорт txt \n2 - экспорт txt \n3 - импорт csv \n4 - экспорт csv \nдля выхода - 0 ')
+            fl2 = int(fl1)
             if fl2 == 1:
                 zz =input('Не забудьте положить файл import_txt.txt в каталог приложения')
                 try:
