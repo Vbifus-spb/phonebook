@@ -1,7 +1,7 @@
 import sqlite3 as sq
 import exim
 
-conn = sq.connect('phonbook1.db')
+conn = sq.connect('phonbook.db')
 
 cur = conn.cursor()
 
@@ -90,30 +90,74 @@ def delet_abon():
         for q in result:
             print('\n', ' '.join(q))
         while True:
-            flag = input('Меняем? Y/N ')
+            flag = input('Удаляем? Y/N ')
             if flag == 'y' or flag == 'Y':
-                cur.execute("DELETE FROM users WHERE rowid = ?;", (r_id,))
+                cur.execute("DELETE FROM phonebook WHERE rowid = ?;", (r_id,))
                 conn.commit()
                 print('Удалено')
                 break
             elif flag == 'n' or flag == 'N':
                 break
 
+def show_all():
+    cur.execute("SELECT * FROM phonebook;")
+    all_results = cur.fetchall()
+    for q in all_results:
+            #q1 = q[0]
+            #q2 = q[1:]
+            print(' '.join(q), '\n')
 
 
-    #print(result)
-
-
-#find_abon()
-#choos_adon()
-update_abon()
-
-'''
 while True:
+    fl = input('1 - телефонная книга \n2 - импорт/экспорт данных \nдля выхода - 0 ')
+    if fl == '1':
+        while True:
+            fl1 = input('1 - просмотр всех записей \n2 - поиск записей \n3 - изменений записей \n4- удаление записей \nдля выхода - 0 ')
+            fl1 = int(fl1)
 
-    if find_abon() == '':
+            if fl1 == 1:
+                show_all()
+
+            elif fl1 == 2:
+                find_abon()
+
+            elif fl1 == 3:
+                update_abon()
+
+            elif fl1 == 4:
+                delet_abon()
+
+            elif fl1 == 0:
+                break
+
+    elif fl == '2':
+        while True:
+            fl2 = input('1 - импорт txt \n2 - экспорт txt \n3 - импорт csv \n4 - экспорт csv \nдля выхода - 0 ')
+            if fl2 == 1:
+                zz =input('Не забудьте положить файл import_txt.txt в каталог приложения')
+                try:
+                    exim.import_txt()
+                except FileNotFoundError:
+                    zz= input('Нет файла с данными для импорта')
+
+            elif fl2 == 2:
+                exim.export_txt()
+
+            elif fl2 == 3:
+                zz =input('Не забудьте положить файл import_csv.csv в каталог приложения')
+                try:
+                    exim.import_csv()
+                except FileNotFoundError:
+                    zz= input('Нет файла с данными для импорта')
+
+            elif fl2 == 4:
+                exim.export_csv
+
+            elif fl2 == 0:
+                break
+
+    elif fl == 0:
         break
-    else:
-        find_abon
-'''
+
+
 conn.close()

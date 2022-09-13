@@ -3,7 +3,7 @@
 import sqlite3 as sq
 import csv
 
-conn = sq.connect('phonbook1.db')
+conn = sq.connect('phonbook.db')
 
 cur = conn.cursor()
 
